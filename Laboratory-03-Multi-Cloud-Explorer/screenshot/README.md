@@ -1,6 +1,6 @@
-CCM101-gustria
-│
-├── README.md
+CCM101-gustria  
+│  
+├── README.md  
 │
 ├── Laboratory-01-Welcome-to-the-Cloud
 │
