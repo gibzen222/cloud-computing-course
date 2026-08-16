@@ -16,12 +16,10 @@ CCM101-gustria
       ├── client-recommendations.md  
       ├── reflection.md  
       └── screenshots  
-            ├── aws-homepage.png  
-            <img width="1919" height="1067" alt="image" src="https://github.com/user-attachments/assets/87ed2758-38ff-482a-8e9d-0b29c88b24e2" />
-
-            ├── azure-homepage.png 
-            <img width="1551" height="1071" alt="image" src="https://github.com/user-attachments/assets/8a656fde-323e-4ae4-92a7-94061503be84" />
-
-            ├── gcp-homepage.png  
-            ├── killercoda-terminal.png  
-            └── github-repository.png  
+├── aws-homepage.png  
+<img width="1919" height="1067" alt="image" src="https://github.com/user-attachments/assets/87ed2758-38ff-482a-8e9d-0b29c88b24e2" />
+├── azure-homepage.png    
+<img width="1551" height="1071" alt="image" src="https://github.com/user-attachments/assets/8a656fde-323e-4ae4-92a7-94061503be84" />
+├── gcp-homepage.png  
+├── killercoda-terminal.png  
+└── github-repository.png  
