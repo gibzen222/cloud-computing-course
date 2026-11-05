@@ -1,0 +1,9 @@
+# Secrets - never commit real passwords
+.env
+
+# Backup output - large files that do not belong in Git
+backups/
+*.sql
+*.sql.gz
+*.tar.gz
+*.log
