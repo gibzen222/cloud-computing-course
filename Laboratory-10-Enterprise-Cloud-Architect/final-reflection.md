@@ -31,7 +31,7 @@ Every requirement now protects something real. Without persistent volumes, a reb
 
 Our final system puts everything from the course in one place. VirtualBox gives us a server, Ubuntu Server runs it, and SSH lets us manage it remotely like a real data center. UFW decides what may enter. Docker Compose builds the two-tier application from one file. Volumes keep the data safe, and a Bash script run by cron backs it up every night.
 
-For us, Infrastructure as Code now means that our server is not something we set up once and hope to remember. It is a set of files in GitHub that anyone on the team can clone and rebuild on a fresh machine in minutes, which is exactly what we did on KillerCoda.
+For us, Infrastructure as Code now means that our server is not something we set up once and hope to remember. It is a set of files in GitHub that anyone on the team can clone and rebuild in minutes, which is exactly what we did when we redeployed our stack on the VM straight from GitHub.
 
 ## 5. Looking ahead
 
