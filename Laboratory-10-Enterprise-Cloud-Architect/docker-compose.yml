@@ -1,0 +1,67 @@
+# =====================================================================
+# CloudNova Technologies - Secure Multi-Tier Web Application
+# Stack: WordPress (web/app tier) + MySQL (data tier)
+#
+# Usage:
+#   cp .env.example .env      # then put real passwords in .env
+#   docker compose up -d
+#   docker compose ps
+#
+# Notes:
+#   - "name: cloudnova" fixes the project name, so the volumes are always
+#     called cloudnova_db_data and cloudnova_wp_data (the backup script
+#     depends on this).
+#   - Only WordPress publishes a port (80). MySQL has NO published port and
+#     is reachable only from WordPress over the private "backend" network.
+#   - Never run "docker compose down -v" unless you want to DELETE all data.
+# =====================================================================
+name: cloudnova
+
+services:
+  db:
+    image: mysql:8.4                    # MySQL 8.4 LTS
+    container_name: cloudnova-db
+    restart: unless-stopped             # auto-start after reboot or crash
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql          # PERSISTENT database storage
+    networks:
+      - backend                         # private network, no ports published
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  wordpress:
+    image: wordpress:latest
+    container_name: cloudnova-wp
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy      # wait until MySQL is really ready
+    ports:
+      - "80:80"                         # the ONLY public port of the stack
+    environment:
+      WORDPRESS_DB_HOST: db:3306        # "db" = service name on the backend network
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+    volumes:
+      - wp_data:/var/www/html           # PERSISTENT themes, plugins, uploads
+    networks:
+      - frontend
+      - backend
+
+volumes:
+  db_data:
+  wp_data:
+
+networks:
+  frontend:
+  backend:
