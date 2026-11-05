@@ -1,44 +1,44 @@
 # Final Reflection: From Mission 1 to Mission 10
 
 **CCM101 - Cloud Computing** · Laboratory 10: The Enterprise Cloud Architect
-**Prepared by:** [Member 1] | [Member 2] | [Member 3] | [Member 4] · **Section:** [BSIT 2A]
-
-> **How to use this template:** this file must be written by you, in your own words, from your own experience. The prompts under each heading tell you what to write about. Replace every prompt with your answer, then delete this box and all prompt text. Aim for roughly 400 to 800 words in total, with real examples (commands, errors, screenshots you remember), not general statements. If each member writes a part, put the member's name under it.
+**Prepared by:** Bustria, Gibzen | Seminiano, Jake | Pascua, John Cyrom | Urbino, Jethrone | Velicaria, John Henrick · **Section:** BSIT 4H
 
 ---
 
 ## 1. Where we started (Mission 1)
 
-*Prompt: What did you know about Linux and cloud computing before Mission 1? What was the first command or concept that confused you, and how did you feel opening a terminal for the first time?*
+Before Mission 1, most of us only knew computers through Windows. Linux was something we had heard of but never really used, and "the cloud" meant saving files in Google Drive. Mission 1 showed us that cloud computing is much bigger than that. We learned the service models (IaaS, PaaS and SaaS) and the deployment models (public, private, hybrid and community), and we classified apps we use every day, like Google Drive, Netflix and GCash.
 
-[Your answer]
+The first time we opened a terminal, we were honestly nervous. There were no buttons or icons, only a blinking cursor, and we were afraid that one wrong command would break something. The first concept that confused us was Git: why we had to add, then commit, then push, instead of just uploading a file. Once we understood that every commit is a saved checkpoint we can go back to, Git started to make sense. That idea came back at the very end of the course, when our whole server became files in a GitHub repository.
 
 ## 2. Building the skills (Missions 2 to 9)
 
-*Prompt: Pick two or three missions that changed how you work. For each one, name the tool or command you learned (for example file permissions, networking, Docker, Docker Compose, firewalls, Bash scripting, cron) and one specific thing it taught you. Mention where you got stuck and how you got unstuck.*
+Comparing cloud platforms (Mission 3). Acting as Cloud Solutions Consultants, we researched AWS, Microsoft Azure and Google Cloud and recommended a platform for different CloudNova clients. At first we wanted to pick the "best" provider. We got unstuck when we realized there is no single best one: the right choice depends on the client's existing tools, budget, skills and growth. That changed how we approach every technical decision: start from the requirement, not from the popular option.
 
-[Your answer]
+Linux commands and file permissions. We learned to move around the file system, edit files with nano, and read permissions with ls -l. We often got stuck on "Permission denied." It took us a while to see that this usually means one of two things: the file is not executable, or we are not allowed to touch it. chmod +x, sudo, and simply reading the error carefully became our first tools for fixing problems.
 
 ## 3. The final mission (Mission 10)
 
-*Prompt: Why did you choose WordPress + MySQL? What was the hardest problem while building this system, and how did you solve it? (Ideas from our own build: the wrong ISO attached to the VM, the missing virtual disk file, the Processing Cap set to 1%, getting port forwarding to work, the database connection, UFW and SSH order.) What would have broken if you had skipped persistent volumes, the firewall, or the backup script?*
+We chose WordPress and MySQL because it is a real multi-tier stack: a web tier and a data tier that must talk to each other securely. It is also widely used, so the official documentation helped us a lot.
 
-[Your answer]
+Mission 10 tested our patience more than any other mission. We first attached a Windows Server ISO instead of Ubuntu, so the VM kept saying no operating system was found. After we rebuilt the VM, it failed again with VERR_FILE_NOT_FOUND because its virtual disk file was missing. The new VM was almost frozen until we noticed the Processing Cap was set to 1% instead of 100%. Then SSH from the laptop failed with kex_exchange_identification, and the cause was simple: we had not ticked "Install OpenSSH server" during installation.
+
+Copying and pasting was another lesson. When we pasted commands from a PDF, the line breaks disappeared and several commands ran as one, and our docker-compose.yml lost its indentation. We solved it by running one command at a time and copying the files to the VM with scp instead of pasting. Our first deployment then showed "Error establishing a database connection" because the database volume had been created with old passwords. Since there was no real data yet, we reset it with docker compose down -v and deployed again. In each case the fix came from reading the error message and checking one thing at a time.
+
+Every requirement now protects something real. Without persistent volumes, a reboot would erase the client's website. Without the firewall, anyone could reach services that should be private. Without the backup script, one mistake would be permanent. We proved this in our demo by deleting a post and restoring it from the nightly backup.
 
 ## 4. How the pieces connect
 
-*Prompt: In your own words, explain how Linux, virtualization, Docker, the firewall and automation work together in your final system. What does "Infrastructure as Code" mean to you now?*
+Our final system puts everything from the course in one place. VirtualBox gives us a server, Ubuntu Server runs it, and SSH lets us manage it remotely like a real data center. UFW decides what may enter. Docker Compose builds the two-tier application from one file. Volumes keep the data safe, and a Bash script run by cron backs it up every night.
 
-[Your answer]
+For us, Infrastructure as Code now means that our server is not something we set up once and hope to remember. It is a set of files in GitHub that anyone on the team can clone and rebuild on a fresh machine in minutes, which is exactly what we did on KillerCoda.
 
 ## 5. Looking ahead
 
-*Prompt: How has this course changed how you see cloud computing, DevOps and system administration? What would you add next to this system (HTTPS, monitoring, off-site backups, a real cloud VM)? What skill do you want to learn next?*
+This course changed how we see cloud computing. It is not just storage on someone else's computer. It is the skill of building systems that are secure, repeatable and able to take care of themselves. We now understand why companies value DevOps: automation and documentation save time and prevent mistakes.
 
-[Your answer]
+If we continued this project, we would add HTTPS with a reverse proxy, send backups off the server to cloud storage, add monitoring and alerts, and deploy the same stack on a real cloud provider such as AWS or Google Cloud. Next, we want to learn container orchestration with Kubernetes and CI/CD pipelines with GitHub Actions.
 
 ## 6. AI use
 
-*Prompt: Briefly and honestly state how you used AI tools during this mission and what you did yourselves (testing, fixing, deciding, writing).*
-
-[Your answer]
+We used an AI assistant (Claude) during Mission 10 to explain concepts, troubleshoot errors, draft parts of the documentation, and help us write this reflection. We did the work ourselves: we built and configured the VM, ran and fixed every command, tested persistence, the firewall, the backups and the restore, and reviewed and edited the documents before submitting them.
