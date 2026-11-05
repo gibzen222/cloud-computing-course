@@ -8,13 +8,13 @@
 
 **Application Stack:** WordPress + MySQL
 
-**Prepared by:** [Member 1] | [Member 2] | [Member 3] | [Member 4]
+**Prepared by:** Bustria, Gibzen | Seminiano, Jake | Pascua, John Cyrom | Urbino, Jethrone | Velicaria, John Henrick
 
-**Section:** [BSIT 2A]
+**Section:** BSIT 4H
 
-**Instructor:** [Instructor name]
+**Instructor:** Torres, Jenkielyn C.
 
-**Date:** November 2026
+**Date:** November 6, 2026
 
 </div>
 
